@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>NamtanFilm 行程與內容</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#F6F7F9; --surface:#FFFFFF; --surface-2:#EDF0F4;
+  --fg:#13181F; --muted:#5C6572; --line:#E1E5EB;
+  --accent:#0E6F7C; --accent-soft:#E2F1F3;
+  --new:#A8491A; --new-soft:#FBEADF;
+  --cap:#7D5200; --cap-soft:#FCF2DA;
+  --full:#53357F; --full-soft:#EFE8F8;
+  --auto:#4A5360; --auto-soft:#E8EBEF;
+  --warn:#8A2B2B; --warn-soft:#FBE6E6;
+  --body:"IBM Plex Sans","PingFang TC","Microsoft JhengHei",sans-serif;
+  --data:"IBM Plex Mono","PingFang TC","Microsoft JhengHei",monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1317; --surface:#171C22; --surface-2:#1F252D;
+  --fg:#E6EAEF; --muted:#97A1AE; --line:#272E37;
+  --accent:#3FB3BE; --accent-soft:#12333A;
+  --new:#E0924F; --new-soft:#3A2415;
+  --cap:#E2B35A; --cap-soft:#352A10;
+  --full:#C0A3E8; --full-soft:#2A1F3D;
+  --auto:#A6B0BC; --auto-soft:#242B33;
+  --warn:#E88B8B; --warn-soft:#3A1E1E;
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#0F1317; --surface:#171C22; --surface-2:#1F252D;
+  --fg:#E6EAEF; --muted:#97A1AE; --line:#272E37;
+  --accent:#3FB3BE; --accent-soft:#12333A;
+  --new:#E0924F; --new-soft:#3A2415;
+  --cap:#E2B35A; --cap-soft:#352A10;
+  --full:#C0A3E8; --full-soft:#2A1F3D;
+  --auto:#A6B0BC; --auto-soft:#242B33;
+  --warn:#E88B8B; --warn-soft:#3A1E1E;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;
+  line-height:1.55;-webkit-font-smoothing:antialiased;
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+img{max-width:100%}
+[hidden]{display:none!important}
+.wrap{max-width:860px;margin:0 auto;padding-inline:18px;padding-block:0 56px}
+h1,h2{margin:0;text-wrap:balance}
+a{color:var(--accent)}
+.mono{font-family:var(--data);font-variant-numeric:tabular-nums}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--bg);
+  border-bottom:1px solid var(--line)}
+.top-in{max-width:860px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;
+  gap:12px;flex-wrap:wrap}
+.brand{font-weight:600;font-size:16px;letter-spacing:-.01em}
+.newpill{margin-left:auto;font-family:var(--data);font-size:12px;font-weight:500;
+  color:var(--new);background:var(--new-soft);
+  border:1px solid color-mix(in srgb,var(--new) 28%,transparent);
+  padding:5px 10px;border-radius:999px;white-space:nowrap}
+.warn{background:var(--warn-soft);border:1px solid color-mix(in srgb,var(--warn) 30%,transparent);
+  color:var(--warn);border-radius:10px;padding:12px 15px;margin-block:18px;font-size:13.5px}
+.sec{margin-block:28px}
+.sec-hd{display:flex;align-items:baseline;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.sec-hd h2{font-size:19px;font-weight:600;letter-spacing:-.01em}
+.sec-n{font-family:var(--data);font-size:12px;color:var(--muted)}
+.evs{display:grid;gap:10px}
+.ev{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+  display:grid;grid-template-columns:auto 1fr;gap:4px 16px;align-items:start}
+.ev-when{font-family:var(--data);font-size:12.5px;color:var(--accent);font-weight:500;
+  white-space:nowrap;padding-top:2px;font-variant-numeric:tabular-nums}
+.ev-t{font-weight:600;font-size:15px;min-width:0}
+.ev-m{grid-column:2;font-size:12.5px;color:var(--muted);display:flex;gap:6px;flex-wrap:wrap;
+  align-items:center}
+.ev-empty{background:var(--surface-2);border:1px dashed var(--line);border-radius:10px;
+  padding:22px 16px;text-align:center;color:var(--muted);font-size:13px}
+.filters{background:var(--surface);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;margin-bottom:14px;display:grid;gap:10px}
+.frow{display:flex;gap:7px;align-items:center;flex-wrap:wrap;min-width:0}
+.flab{font-family:var(--data);font-size:10.5px;color:var(--muted);letter-spacing:.07em;
+  min-width:62px;flex-shrink:0}
+.chip{font-size:12.5px;font-family:var(--body);background:var(--surface-2);color:var(--fg);
+  border:1px solid transparent;padding:4px 10px;border-radius:999px;cursor:pointer;
+  white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+.fsel{font-size:12.5px;font-family:var(--body);background:var(--surface-2);color:var(--fg);
+  border:1px solid var(--line);border-radius:7px;padding:5px 8px;max-width:100%}
+.clearf{font-size:12px;color:var(--muted);background:none;border:none;cursor:pointer;
+  text-decoration:underline;padding:4px}
+.cts{display:grid;gap:8px}
+.ct{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 14px;
+  display:grid;gap:7px}
+.ct.is-new{border-left:3px solid var(--new);padding-left:11px}
+.ct-r1{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.ct-r2{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;min-width:0}
+.ct-r3{font-size:12.5px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.bd{font-family:var(--data);font-size:11px;font-weight:500;padding:3px 8px;border-radius:5px;
+  white-space:nowrap}
+.bd-k{background:var(--surface-2);color:var(--muted)}
+.bd-cap{background:var(--cap-soft);color:var(--cap)}
+.bd-full{background:var(--full-soft);color:var(--full)}
+.bd-auto{background:var(--auto-soft);color:var(--auto)}
+.bd-new{background:var(--new-soft);color:var(--new)}
+.ct-who{font-family:var(--data);font-size:13.5px;font-weight:500;color:var(--fg)}
+.ct-when{font-family:var(--data);font-size:12px;color:var(--muted);margin-left:auto;
+  white-space:nowrap;font-variant-numeric:tabular-nums}
+.ct-go{font-family:var(--data);font-size:12px;color:var(--accent);text-decoration:none;
+  border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:6px;
+  padding:3px 9px;white-space:nowrap}
+.offsite{font-family:var(--data);font-size:10.5px;color:var(--muted)}
+.none{padding:26px 16px;text-align:center;color:var(--muted);font-size:13px;
+  background:var(--surface-2);border-radius:10px}
+#dbg{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;
+  margin-top:26px}
+#dbg h2{font-size:14px;padding:12px 15px;border-bottom:1px solid var(--line)}
+.tscroll{overflow-x:auto;max-height:260px}
+table{width:100%;border-collapse:collapse;font-family:var(--data);font-size:11.5px}
+th{text-align:left;padding:7px 10px;color:var(--muted);font-weight:500;
+  background:var(--surface-2);position:sticky;top:0;white-space:nowrap}
+td{padding:6px 10px;border-top:1px solid var(--line);vertical-align:top}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:560px){
+  .flab{min-width:100%}
+  .ev{grid-template-columns:1fr}
+  .ev-m{grid-column:1}
+  .ct-when{margin-left:0}
+}
+</style>
+</head>
+<body>
+<div class="top"><div class="top-in">
+  <span class="brand">NamtanFilm 行程與內容</span>
+  <span class="newpill mono" id="newpill" hidden></span>
+</div></div>
+
+<div class="wrap">
+  <div class="warn" id="nouser" hidden>
+    這個連結少了編號，你看到的內容是完整的，但我們收不到使用紀錄。
+    請用我們私訊給你的那一條連結開啟，謝謝！
+  </div>
+
+  <section class="sec" id="sec-sched">
+    <div class="sec-hd"><h2>接下來的行程</h2><span class="sec-n" id="n-ev"></span></div>
+    <div class="evs" id="evs"></div>
+  </section>
+
+  <section class="sec" id="sec-content">
+    <div class="sec-hd"><h2>活動後內容</h2><span class="sec-n" id="n-ct"></span></div>
+    <div class="filters">
+      <div class="frow"><span class="flab">人物</span><span id="f-subj"></span></div>
+      <div class="frow"><span class="flab">類型</span><span id="f-type"></span></div>
+      <div class="frow"><span class="flab">翻譯</span><span id="f-tr"></span></div>
+      <div class="frow"><span class="flab">找活動</span>
+        <select class="fsel" id="f-ev"><option value="">全部活動</option></select></div>
+      <div class="frow"><span class="flab">找拍攝者</span>
+        <select class="fsel" id="f-who"><option value="">全部拍攝者</option></select>
+        <button class="clearf" id="clearf" type="button">清除篩選</button></div>
+    </div>
+    <div class="cts" id="cts"></div>
+  </section>
+
+  <section id="dbg" hidden>
+    <h2>追蹤紀錄（只有網址加 &amp;debug=1 才會出現）</h2>
+    <div class="tscroll"><table>
+      <thead><tr><th>時間</th><th>u</th><th>v</th><th>動作</th><th>區塊</th><th>目標</th><th>送出</th></tr></thead>
+      <tbody id="dbg-rows"></tbody>
+    </table></div>
+  </section>
+</div>
+<script>
+const EVENTS=[{"id":"E01","date":"2026-09-18","time":"18:42","title":"NamtanFilm 糖影 IG 雙人直播連線","online":true,"venue":"Instagram","artists":["Namtan","Film"],"tags":[],"type":"直播","cp":true,"src":"https://www.instagram.com/namtan.tipnaree/"},{"id":"E02","date":"2026-09-22","time":"11:00","title":"GARNIER LAB THE CLINICAL VIT C EXPERIENCE","online":false,"venue":"CentralWorld, Bangkok","artists":["Film"],"tags":["Lunar"],"type":"代言活動","cp":false,"src":"https://x.com/GarnierThailand/status/2099822333410087149"},{"id":"E03","date":"2026-09-25","time":"21:00","title":"The Celebrities EP.11 (น้ำตาล - ฟิล์ม)","online":true,"venue":"TrueID","artists":["Namtan","Film"],"tags":[],"type":"訪談","cp":true,"src":"https://www.threads.com/share/Ij2Wu8Ya0/"},{"id":"E04","date":"2026-09-29","time":"22:30","title":"GMMTV LIVE HOUSE with NAMTAN FILM LUNAR","online":true,"venue":"YouTube/TikTok","artists":["Namtan","Film"],"tags":["Lunar"],"type":"直播","cp":true,"src":"https://www.youtube.com/live/JGbHzmnCxL4"},{"id":"E05","date":"2026-10-02","time":"17:00","title":"Girl Rules FanMeeting in Manila（接機）","online":false,"venue":"馬尼拉機場","artists":["Namtan","Film","Milk","Love","View","Mim"],"tags":[],"type":"接機","cp":true,"src":""},{"id":"E06","date":"2026-10-03","time":"16:45","title":"Girl Rules FanMeeting in Manila（彩排）","online":false,"venue":"馬尼拉 SMX Convention Center","artists":["Namtan","Film","Milk","Love","View","Mim"],"tags":[],"type":"彩排","cp":true,"src":""},{"id":"E07","date":"2026-10-03","time":"18:00","title":"Girl Rules FanMeeting in Manila（正式）","online":false,"venue":"馬尼拉 SMX Convention Center","artists":["Namtan","Film","Milk","Love","View","Mim"],"tags":[],"type":"見面會","cp":true,"src":"https://www.instagram.com/p/DdvxXBWkneY/"},{"id":"E08","date":"2026-10-09","time":"19:30","title":"GMMTV Fanival 2026 Happy Family Fan Sign","online":false,"venue":"Union Hall, Union Mall","artists":["Namtan","Film"],"tags":[],"type":"簽售","cp":true,"src":"https://www.instagram.com/p/Dd6PIQnHwSK/"},{"id":"E09","date":"2026-10-10","time":"21:00","title":"Namtan × Garnier TikTok Shop 直播","online":true,"venue":"TikTok Shop","artists":["Namtan"],"tags":[],"type":"直播","cp":false,"src":"https://x.com/GarnierThailand/status/2105615117354156502"}];
+const CONTENTS=[{"id":"C01","ev":"E01","pf":"bilibili","ct":"粉絲翻譯","fansite":false,"who":"@沙吞","url":"https://www.bilibili.com/video/BV1hqet6nEge/","date":"2026-09-19","time":"19:47","prec":"exact","hrs":25.08,"subj":["Namtan","Film"],"tags":[],"lang":"zh","tr":"@沙吞","cap":false,"note":""},{"id":"C02","ev":"E01","pf":"bilibili","ct":"粉絲翻譯","fansite":false,"who":"@wantineng","url":"https://www.bilibili.com/video/BV1MHeb6nEak/","date":"2026-09-19","time":"17:27","prec":"exact","hrs":22.75,"subj":["Namtan","Film"],"tags":[],"lang":"zh","tr":"@wantineng","cap":false,"note":""},{"id":"C03","ev":"E02","pf":"X","ct":"飯拍影片","fansite":false,"who":"@maewsom_debut","url":"https://x.com/maewsom_debut/status/2102389801463005259","date":"2026-09-22","time":"21:29","prec":"exact","hrs":10.48,"subj":["Film"],"tags":[],"lang":"zh","tr":"@maewsom_debut","cap":true,"note":"影片內談論內容的翻譯放在文案"},{"id":"C04","ev":"E02","pf":"X","ct":"飯拍影片","fansite":false,"who":"@iam_minxdd","url":"https://x.com/iam_minxdd/status/2102317032784236696","date":"2026-09-22","time":"16:40","prec":"exact","hrs":5.67,"subj":["Film"],"tags":[],"lang":"","tr":"","cap":false,"note":"含聊天"},{"id":"C05","ev":"E02","pf":"X","ct":"飯拍影片","fansite":false,"who":"@manoi_31","url":"https://x.com/manoi_31/status/2102411458097385668","date":"2026-09-22","time":"22:55","prec":"exact","hrs":11.92,"subj":["Film"],"tags":["Lunar"],"lang":"","tr":"","cap":false,"note":"純側拍"},{"id":"C06","ev":"E02","pf":"X","ct":"飯拍影片","fansite":false,"who":"@cyt2on","url":"https://x.com/cyt2on/status/2102317479859306728","date":"2026-09-22","time":"16:42","prec":"exact","hrs":5.7,"subj":["Film"],"tags":[],"lang":"","tr":"","cap":false,"note":"純正面"},{"id":"C07","ev":"E02","pf":"X","ct":"品牌方拍","fansite":false,"who":"@GarnierThailand","url":"https://x.com/GarnierThailand/status/2102312273121562693","date":"2026-09-22","time":"16:21","prec":"exact","hrs":5.35,"subj":["Film"],"tags":["Lunar"],"lang":"","tr":"","cap":false,"note":"品牌官方帳號"},{"id":"C08","ev":"E02","pf":"X","ct":"飯拍影片","fansite":false,"who":"@deconsec02","url":"https://x.com/deconsec02/status/2102315128678961520","date":"2026-09-22","time":"16:32","prec":"exact","hrs":5.53,"subj":["Film"],"tags":[],"lang":"","tr":"","cap":false,"note":"招牌動作"},{"id":"C09","ev":"E02","pf":"Threads","ct":"粉絲翻譯","fansite":false,"who":"@cynthia00127","url":"https://www.threads.com/@cynthia00127/post/DdlgAJjDwiZ","date":"2026-09-22","time":"","prec":"date_only","hrs":null,"subj":[],"tags":["Lunar"],"lang":"zh","tr":"@cynthia00127","cap":false,"note":"只知日期不知時間"},{"id":"C10","ev":"E02","pf":"X","ct":"站姊拍","fansite":true,"who":"@RachanunFanbase","url":"https://x.com/RachanunFanbase/status/2102302335104078188","date":"2026-09-22","time":"15:41","prec":"exact","hrs":4.68,"subj":["Film"],"tags":["Lunar"],"lang":"th","tr":"","cap":false,"note":"文案是泰文原文，非翻譯"},{"id":"C11","ev":"E02","pf":"X","ct":"飯拍影片","fansite":false,"who":"@Jaa_0114","url":"https://x.com/Jaa_0114/status/2102327235676111308","date":"2026-09-22","time":"17:20","prec":"exact","hrs":6.33,"subj":["Film"],"tags":[],"lang":"th","tr":"","cap":false,"note":"文案是泰文原文，非翻譯"},{"id":"C12","ev":"E02","pf":"X","ct":"飯拍照片","fansite":false,"who":"@SmurfxBunny","url":"https://x.com/SmurfxBunny/status/2102364625966665891","date":"2026-09-22","time":"19:49","prec":"exact","hrs":8.82,"subj":["Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C13","ev":"E02","pf":"X","ct":"飯拍照片","fansite":false,"who":"@Xiaobu_wakaka","url":"https://x.com/Xiaobu_wakaka/status/2102587945484161530","date":"2026-09-23","time":"10:36","prec":"exact","hrs":23.6,"subj":["Film"],"tags":["Lunar"],"lang":"","tr":"","cap":false,"note":"隔日發"},{"id":"C14","ev":"E02","pf":"X","ct":"飯拍影片","fansite":false,"who":"@filmdimples","url":"https://x.com/filmdimples/status/2102391157502415309","date":"2026-09-22","time":"21:34","prec":"exact","hrs":10.57,"subj":["Film"],"tags":[],"lang":"en","tr":"@filmdimples","cap":true,"note":"英文翻譯放在文案"},{"id":"C15","ev":"E03","pf":"bilibili","ct":"粉絲翻譯","fansite":false,"who":"@wantineng","url":"https://www.bilibili.com/video/BV17shR6YE5o/","date":"2026-09-26","time":"19:20","prec":"exact","hrs":22.33,"subj":["Namtan","Film"],"tags":[],"lang":"zh","tr":"@wantineng","cap":false,"note":""},{"id":"C16","ev":"E04","pf":"YouTube","ct":"平台字幕","fansite":false,"who":"@GMMTV","url":"https://www.youtube.com/live/JGbHzmnCxL4","date":"2026-09-29","time":"22:30","prec":"exact","hrs":0.0,"subj":["Namtan","Film"],"tags":["Lunar"],"lang":"auto","tr":"","cap":false,"note":"平台內建字幕≠粉絲翻譯"},{"id":"C17","ev":"E04","pf":"bilibili","ct":"粉絲翻譯","fansite":false,"who":"@wantineng","url":"https://www.bilibili.com/video/BV1cAYP6YE2S/","date":"2026-10-01","time":"14:11","prec":"exact","hrs":39.68,"subj":["Namtan","Film"],"tags":[],"lang":"zh","tr":"@wantineng","cap":false,"note":""},{"id":"C18","ev":"E05","pf":"Instagram","ct":"官拍","fansite":false,"who":"@gmmtv","url":"https://www.instagram.com/p/Dd-8RUSMOgm/","date":"2026-10-02","time":"17:20","prec":"approx","hrs":0.33,"subj":["Namtan","Film","Milk","Love","View","Mim"],"tags":[],"lang":"","tr":"","cap":false,"note":"原記「17:20左右」"},{"id":"C19","ev":"E05","pf":"X","ct":"飯拍影片","fansite":false,"who":"@nilej_15","url":"https://x.com/nilej_15/status/2105987719511859459","date":"2026-10-02","time":"19:46","prec":"exact","hrs":2.77,"subj":["Namtan","Film","Milk","Love","View","Mim"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C20","ev":"E05","pf":"X","ct":"飯拍照片","fansite":false,"who":"@fxfrvr","url":"https://x.com/fxfrvr/status/2105998490455494795","date":"2026-10-02","time":"20:29","prec":"exact","hrs":3.48,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C21","ev":"E05","pf":"X","ct":"飯拍照片","fansite":false,"who":"@fxfrvr","url":"https://x.com/fxfrvr/status/2106012408217272463","date":"2026-10-02","time":"21:24","prec":"exact","hrs":4.4,"subj":["Namtan"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C22","ev":"E06","pf":"X","ct":"飯拍影片","fansite":false,"who":"@fxfrvr","url":"https://x.com/fxfrvr/status/2106313084206043403","date":"2026-10-03","time":"17:19","prec":"exact","hrs":0.57,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C23","ev":"E06","pf":"X","ct":"飯拍照片","fansite":false,"who":"@lock0225","url":"https://x.com/lock0225/status/2106310586321834345","date":"2026-10-03","time":"17:09","prec":"exact","hrs":0.4,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C24","ev":"E06","pf":"X","ct":"飯拍影片","fansite":false,"who":"@LuCifeRes","url":"https://x.com/LuCifeRes/status/2106315335960088985","date":"2026-10-03","time":"17:28","prec":"exact","hrs":0.72,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C25","ev":"E06","pf":"X","ct":"飯拍影片","fansite":false,"who":"@wavemeowz","url":"https://x.com/wavemeowz/status/2106316422364463431","date":"2026-10-03","time":"17:32","prec":"exact","hrs":0.78,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C26","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@itsPaulineSy","url":"https://x.com/itsPaulineSy/status/2106347007220805969","date":"2026-10-03","time":"19:33","prec":"exact","hrs":1.55,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":"遊戲環節"},{"id":"C27","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@jamakasohot","url":"https://x.com/jamakasohot/status/2106352711616942487","date":"2026-10-03","time":"19:56","prec":"exact","hrs":1.93,"subj":["Namtan","Film"],"tags":[],"lang":"zh","tr":"@jamakasohot","cap":true,"note":"2026-10-04 經 MIN 重新分類：文案含翻譯"},{"id":"C28","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@jxytj2","url":"https://x.com/jxytj2/status/2106358733471396345","date":"2026-10-03","time":"20:20","prec":"exact","hrs":2.33,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C29","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@XiJue0422","url":"https://x.com/XiJue0422/status/2106359126586773684","date":"2026-10-03","time":"20:22","prec":"exact","hrs":2.37,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C30","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@fxfrvr","url":"https://x.com/fxfrvr/status/2106363009119703242","date":"2026-10-03","time":"20:37","prec":"exact","hrs":2.62,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C31","ev":"E07","pf":"X","ct":"站姊拍","fansite":true,"who":"@NamtanFilmVNFP","url":"https://x.com/NamtanFilmVNFP/status/2106380749800878419","date":"2026-10-03","time":"20:18","prec":"exact","hrs":2.3,"subj":["Namtan","Film","Milk","Love","View","Mim"],"tags":[],"lang":"","tr":"","cap":false,"note":"越南 NamtanFilm 粉絲站"},{"id":"C32","ev":"E07","pf":"X","ct":"飯拍照片","fansite":false,"who":"@lock0225","url":"https://x.com/lock0225/status/2106370156037595346","date":"2026-10-03","time":"21:05","prec":"exact","hrs":3.08,"subj":["Namtan"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C33","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@rangpa201","url":"https://x.com/rangpa201/status/2106372282679799953","date":"2026-10-03","time":"21:14","prec":"exact","hrs":3.23,"subj":["Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C34","ev":"E07","pf":"X","ct":"官拍","fansite":false,"who":"@GMMTV","url":"https://x.com/GMMTV/status/2106374575605055746","date":"2026-10-03","time":"21:23","prec":"exact","hrs":3.38,"subj":["Namtan","Film","Milk","Love","View","Mim"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C35","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@LuCifeRes","url":"https://x.com/LuCifeRes/status/2106378156878053385","date":"2026-10-03","time":"21:37","prec":"exact","hrs":3.62,"subj":["Film","Love","Milk"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C36","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@fxfrvr","url":"https://x.com/fxfrvr/status/2106384243429691641","date":"2026-10-03","time":"22:01","prec":"exact","hrs":4.02,"subj":["Namtan","Film","Milk","Love","View","Mim"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C37","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@lock0225","url":"https://x.com/lock0225/status/2106415381363691980","date":"2026-10-04","time":"00:05","prec":"exact","hrs":6.08,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":"表演環節"},{"id":"C38","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@lock0225","url":"https://x.com/lock0225/status/2106425249172697376","date":"2026-10-04","time":"00:44","prec":"exact","hrs":6.73,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":"表演環節"},{"id":"C39","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@lock0225","url":"https://x.com/lock0225/status/2106386136767848652","date":"2026-10-04","time":"00:44","prec":"exact","hrs":6.73,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":"表演環節"},{"id":"C40","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@fxfrvr","url":"https://x.com/fxfrvr/status/2106436800483152345","date":"2026-10-04","time":"01:30","prec":"exact","hrs":7.5,"subj":["Namtan","Film"],"tags":[],"lang":"zh","tr":"@fxfrvr","cap":true,"note":"翻譯放在文案"},{"id":"C41","ev":"E07","pf":"X","ct":"飯拍照片","fansite":false,"who":"@lock0225","url":"https://x.com/lock0225/status/2106439614055821479","date":"2026-10-04","time":"01:41","prec":"exact","hrs":7.68,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C42","ev":"E07","pf":"X","ct":"飯拍照片","fansite":false,"who":"@lock0225","url":"https://x.com/lock0225/status/2106451008910225672","date":"2026-10-04","time":"02:27","prec":"exact","hrs":8.45,"subj":["Namtan"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C43","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@LuCifeRes","url":"https://x.com/LuCifeRes/status/2106468019144896628","date":"2026-10-04","time":"03:34","prec":"exact","hrs":9.57,"subj":["Namtan","Film","Milk","Love","View","Mim"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C44","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@XiJue0422","url":"https://x.com/XiJue0422/status/2106511695783035032","date":"2026-10-04","time":"06:28","prec":"exact","hrs":12.47,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C45","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@ilybenyapa","url":"https://x.com/ilybenyapa/status/2106566401591046389","date":"2026-10-04","time":"10:05","prec":"exact","hrs":16.08,"subj":["Namtan","Film","Milk","Love","View","Mim"],"tags":[],"lang":"zh","tr":"@ilybenyapa","cap":true,"note":"翻譯放在文案"},{"id":"C46","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@aiahrene_","url":"https://x.com/aiahrene_/status/2106574775854436482","date":"2026-10-04","time":"10:38","prec":"exact","hrs":16.63,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C47","ev":"E07","pf":"X","ct":"飯拍照片","fansite":false,"who":"@fujifilmMMfc","url":"https://x.com/fujifilmMMfc/status/2106575707358851156","date":"2026-10-04","time":"10:42","prec":"exact","hrs":16.7,"subj":["Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C48","ev":"E07","pf":"X","ct":"飯拍照片","fansite":false,"who":"@ilybenyapa","url":"https://x.com/ilybenyapa/status/2106578498748117318","date":"2026-10-04","time":"10:53","prec":"exact","hrs":16.88,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C49","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@aiahrene_","url":"https://x.com/aiahrene_/status/2106578686413873470","date":"2026-10-04","time":"10:54","prec":"exact","hrs":16.9,"subj":["Namtan","Film"],"tags":[],"lang":"","tr":"","cap":false,"note":""},{"id":"C50","ev":"E07","pf":"X","ct":"飯拍照片","fansite":false,"who":"@YeelenFilmracha","url":"https://x.com/YeelenFilmracha/status/2106396275121983983","date":"2026-10-04","time":"10:49","prec":"exact","hrs":16.82,"subj":["Film"],"tags":[],"lang":"","tr":"","cap":false,"note":"原記 10/03 10:49，經 MIN 確認（2026-10-04）應為 10/04"},{"id":"C51","ev":"E07","pf":"X","ct":"飯拍影片","fansite":false,"who":"@Persist_14","url":"https://x.com/Persist_14/status/2106572148794175706","date":"2026-10-04","time":"10:28","prec":"exact","hrs":16.47,"subj":["Namtan","Film","Milk","Love"],"tags":[],"lang":"","tr":"","cap":false,"note":"經 MIN 確認（2026-10-04）：不另立送機活動，歸入 E07"}];
+</script>
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   ⬇⬇⬇  只有這一行要改：把 Google Apps Script 的網址貼進來  ⬇⬇⬇
+   ═══════════════════════════════════════════════════════════════ */
+const TRACK_URL = "https://script.google.com/macros/s/AKfycbyixrGM7E2LKBFXCygLQ7dDXhteNSOsSHXh6DEPLk0cE7trwN9g48FVdALERoBfxtuy/exec";
+/* ═══════════════════════════════════════════════════════════════
+   ⬆⬆⬆  改完這行就可以上線了，下面都不用動  ⬆⬆⬆
+   ═══════════════════════════════════════════════════════════════ */
+
+const TODAY = new Date().toISOString().slice(0,10);
+const Q = new URLSearchParams(location.search);
+const U = (Q.get("u") || "").replace(/[^0-9]/g,"").slice(0,3);
+const V = Q.get("v") === "b" ? "b" : "a";
+const DEBUG = Q.get("debug") === "1";
+
+let LAST = "2000-01-01T00:00";
+try { LAST = localStorage.getItem("ft_last_" + (U||"x")) || LAST; } catch(e) {}
+
+const EV_BY_ID = Object.fromEntries(EVENTS.map(e => [e.id, e]));
+const dt = c => c.date + "T" + (c.time || "23:59");
+const isNew = c => dt(c) > LAST;
+const md = s => s ? s.slice(5).replace("-","/") : "";
+const esc = s => String(s).replace(/[&<>"]/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[m]));
+
+/* ── 追蹤：每個動作送一列到 Google 試算表 ── */
+function track(action, section, target, trType) {
+  const row = {
+    u: U || "none", v: V, action: action, section: section,
+    target: String(target || ""), tr: trType || "",
+    at: new Date().toISOString(), ua: navigator.userAgent.slice(0,120)
+  };
+  let sent = "送出中";
+  if (TRACK_URL.indexOf("http") === 0) {
+    try {
+      fetch(TRACK_URL, {
+        method: "POST", mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(row)
+      }).then(() => {}).catch(() => {});
+      sent = "已送";
+    } catch(e) { sent = "失敗"; }
+  } else {
+    sent = "未設定網址";
+  }
+  if (DEBUG) {
+    const tb = document.getElementById("dbg-rows");
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${new Date().toTimeString().slice(0,8)}</td><td>${esc(row.u)}</td>`
+      + `<td>${row.v}</td><td>${esc(action)}</td><td>${esc(section)}</td>`
+      + `<td>${esc(row.target)}</td><td>${sent}</td>`;
+    tb.insertBefore(tr, tb.firstChild);
+  }
+}
+
+/* ── 行程區 ── */
+function renderEvents() {
+  const up = EVENTS.filter(e => e.date >= TODAY)
+                   .sort((a,b) => (a.date+a.time).localeCompare(b.date+b.time));
+  document.getElementById("n-ev").textContent = up.length + " 場";
+  const box = document.getElementById("evs");
+  if (!up.length) {
+    box.innerHTML = '<div class="ev-empty">目前沒有已公告的活動。<br>'
+      + '有新公告我們會馬上更新，可以過幾天再回來看。</div>';
+    return;
+  }
+  box.innerHTML = up.map(e => `<div class="ev">
+    <div class="ev-when">${md(e.date)}<br>${e.time}</div>
+    <div class="ev-t">${esc(e.title)}</div>
+    <div class="ev-m">
+      <span class="bd bd-k">${esc(e.type)}</span>
+      <span>${e.online ? "線上" : "線下"} · ${esc(e.venue)}</span>
+      <span>${esc(e.artists.join(" / "))}</span>
+      ${e.src ? `<a class="ct-go" href="${esc(e.src)}" target="_blank" rel="noopener" data-ev="${e.id}">公告 ↗</a>` : '<span class="offsite">無官方公告</span>'}
+    </div></div>`).join("");
+  box.querySelectorAll("[data-ev]").forEach(a =>
+    a.addEventListener("click", () => track("外連點擊", "行程區", a.dataset.ev)));
+}
+
+/* ── 篩選器 ── */
+const F = { subj:null, type:null, tr:null, ev:"", who:"" };
+const SUBJ = ["Namtan","Film","Milk","Love","View","Mim"];
+const TYPES = [...new Set(CONTENTS.map(c => c.ct))];
+
+function chips(host, items, key, label) {
+  const el = document.getElementById(host);
+  el.innerHTML = items.map(v =>
+    `<button class="chip" type="button" aria-pressed="false" data-v="${esc(v)}">${esc(v)}</button>`).join("");
+  el.querySelectorAll(".chip").forEach(b =>
+    b.addEventListener("click", () => {
+      const on = F[key] === b.dataset.v;
+      F[key] = on ? null : b.dataset.v;
+      el.querySelectorAll(".chip").forEach(x =>
+        x.setAttribute("aria-pressed", String(!on && x === b)));
+      track("篩選", label, F[key] || "清除");
+      renderContents();
+    }));
+}
+
+function initFilters() {
+  chips("f-subj", SUBJ, "subj", "人物");
+  chips("f-type", TYPES, "type", "類型");
+  chips("f-tr", ["文案有翻譯","完整翻譯","平台字幕"], "tr", "翻譯");
+
+  const sel = document.getElementById("f-ev");
+  EVENTS.filter(e => CONTENTS.some(c => c.ev === e.id)).forEach(e => {
+    const n = CONTENTS.filter(c => c.ev === e.id).length;
+    sel.insertAdjacentHTML("beforeend",
+      `<option value="${e.id}">${md(e.date)} ${esc(e.title)}（${n}）</option>`);
+  });
+  sel.addEventListener("change", () => {
+    F.ev = sel.value;
+    track("依活動檢索", "內容區", sel.value || "清除");
+    renderContents();
+  });
+
+  const who = document.getElementById("f-who");
+  const cnt = {};
+  CONTENTS.forEach(c => cnt[c.who] = (cnt[c.who]||0) + 1);
+  Object.entries(cnt).sort((a,b) => b[1]-a[1]).forEach(([h,n]) =>
+    who.insertAdjacentHTML("beforeend", `<option value="${esc(h)}">${esc(h)}（${n}）</option>`));
+  who.addEventListener("change", () => {
+    F.who = who.value;
+    track("依拍攝者檢索", "內容區", who.value || "清除");
+    renderContents();
+  });
+
+  document.getElementById("clearf").addEventListener("click", () => {
+    F.subj = F.type = F.tr = null; F.ev = F.who = "";
+    document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed","false"));
+    sel.value = ""; who.value = "";
+    track("清除篩選", "內容區", "全部");
+    renderContents();
+  });
+}
+
+/* ── 內容區 ── */
+function match(c) {
+  if (F.subj && !c.subj.includes(F.subj)) return false;
+  if (F.type && c.ct !== F.type) return false;
+  if (F.ev && c.ev !== F.ev) return false;
+  if (F.who && c.who !== F.who) return false;
+  if (F.tr === "文案有翻譯" && !c.cap) return false;
+  if (F.tr === "完整翻譯" && c.ct !== "粉絲翻譯") return false;
+  if (F.tr === "平台字幕" && c.ct !== "平台字幕") return false;
+  return true;
+}
+
+function renderContents() {
+  const list = CONTENTS.filter(match).sort((a,b) => dt(b).localeCompare(dt(a)));
+  document.getElementById("n-ct").textContent =
+    list.length === CONTENTS.length ? CONTENTS.length + " 筆"
+                                    : list.length + " / " + CONTENTS.length + " 筆";
+  const box = document.getElementById("cts");
+  if (!list.length) { box.innerHTML = '<div class="none">這組條件沒有內容。</div>'; return; }
+  box.innerHTML = list.map(c => {
+    const e = EV_BY_ID[c.ev], n = isNew(c);
+    const b = [`<span class="bd bd-k">${esc(c.ct === "粉絲翻譯" ? "完整翻譯" : c.ct)}</span>`];
+    if (c.cap) b.push('<span class="bd bd-cap">📝 文案有翻譯</span>');
+    if (c.ct === "粉絲翻譯") b.push('<span class="bd bd-full">🎬 完整翻譯</span>');
+    if (c.ct === "平台字幕") b.push('<span class="bd bd-auto">🤖 平台字幕</span>');
+    if (c.fansite) b.push('<span class="bd bd-k">站姊</span>');
+    if (n) b.push('<span class="bd bd-new">NEW</span>');
+    const off = ["bilibili","Threads","YouTube","Instagram"].includes(c.pf);
+    const when = (c.prec === "date_only" ? md(c.date) + " 時間不詳"
+                  : md(c.date) + " " + c.time + (c.prec === "approx" ? " 左右" : ""))
+                 + (c.hrs != null ? ` · 活動後 ${c.hrs.toFixed(1)} 小時` : "");
+    const trType = c.cap ? "cap" : c.ct === "粉絲翻譯" ? "full"
+                   : c.ct === "平台字幕" ? "auto" : "";
+    return `<div class="ct${n ? " is-new" : ""}">
+      <div class="ct-r1">${b.join("")}</div>
+      <div class="ct-r2">
+        <span class="ct-who">${esc(c.who)}</span>
+        <span>${esc(c.pf)}${off ? ' <span class="offsite">站外</span>' : ""}</span>
+        <span class="ct-when">${when}</span>
+      </div>
+      <div class="ct-r3">
+        <span>${esc(e ? e.title : c.ev)}</span>
+        ${c.subj.length ? `<span>拍到 ${esc(c.subj.join(" / "))}</span>` : ""}
+        <a class="ct-go" href="${esc(c.url)}" target="_blank" rel="noopener"
+           data-c="${c.id}" data-tr="${trType}">看內容 ↗</a>
+      </div></div>`;
+  }).join("");
+  box.querySelectorAll("[data-c]").forEach(a =>
+    a.addEventListener("click", () =>
+      track("外連點擊", "內容區", a.dataset.c, a.dataset.tr)));
+}
+
+/* ── 新增提示 ── */
+function renderNew() {
+  const n = CONTENTS.filter(isNew).length;
+  const pill = document.getElementById("newpill");
+  if (n && n < CONTENTS.length) {
+    pill.textContent = `新增 ${n} 筆`;
+    pill.hidden = false;
+  } else {
+    pill.hidden = true;
+  }
+}
+
+/* ── 兩區順序（v=b 時內容區在上）── */
+function applyV() {
+  if (V === "b") {
+    const w = document.querySelector(".wrap");
+    w.insertBefore(document.getElementById("sec-content"),
+                   document.getElementById("sec-sched"));
+  }
+}
+
+/* ── 啟動 ── */
+document.getElementById("nouser").hidden = !!U;
+document.getElementById("dbg").hidden = !DEBUG;
+renderEvents();
+initFilters();
+renderContents();
+renderNew();
+applyV();
+track("開啟頁面", V === "b" ? "內容區在上" : "行程區在上", location.search || "(無參數)");
+
+/* 離開頁面時把「上次造訪」更新成現在 */
+window.addEventListener("pagehide", () => {
+  try { localStorage.setItem("ft_last_" + (U||"x"), new Date().toISOString().slice(0,16)); } catch(e) {}
+});
+</script>
+</body>
+</html>
