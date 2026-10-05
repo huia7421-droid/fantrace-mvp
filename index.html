@@ -187,9 +187,29 @@ const TRACK_URL = "https://script.google.com/macros/s/AKfycbwvxm9GcRag7NFUpIi4Wp
 
 const TODAY = new Date().toISOString().slice(0,10);
 const Q = new URLSearchParams(location.search);
-const U = (Q.get("u") || "").replace(/[^0-9]/g,"").slice(0,3);
-const V = Q.get("v") === "b" ? "b" : "a";
 const DEBUG = Q.get("debug") === "1";
+
+/* 編號與版本：網址有就用網址的，並記住；網址沒有就用記住的。
+   （測試者從瀏覽器紀錄或書籤回訪時，網址常常不帶參數） */
+function remember(key, val) { try { localStorage.setItem("ft_" + key, val); } catch(e) {} }
+function recall(key) { try { return localStorage.getItem("ft_" + key) || ""; } catch(e) { return ""; } }
+
+let U = (Q.get("u") || "").replace(/[^0-9]/g, "").slice(0, 3);
+let V = Q.get("v") === "b" ? "b" : (Q.get("v") === "a" ? "a" : "");
+let ARRIVE;
+
+if (U) { remember("u", U); } else { U = recall("u"); }
+if (V) { remember("v", V); } else { V = recall("v"); }
+
+if (Q.get("u") && Q.get("v")) {
+  ARRIVE = location.search;
+} else if (U || V) {
+  ARRIVE = (location.search || "(無參數)") + " → 記憶 u=" + (U || "?") + " v=" + (V || "?");
+} else {
+  ARRIVE = location.search || "(無參數)";
+}
+
+if (!V) V = "a";   // 完全沒有紀錄時才用預設
 
 let LAST = "2000-01-01T00:00";
 try { LAST = localStorage.getItem("ft_last_" + (U||"x")) || LAST; } catch(e) {}
@@ -392,7 +412,7 @@ initFilters();
 renderContents();
 renderNew();
 applyV();
-track("開啟頁面", V === "b" ? "內容區在上" : "行程區在上", location.search || "(無參數)");
+track("開啟頁面", V === "b" ? "內容區在上" : "行程區在上", ARRIVE);
 
 /* 離開頁面時把「上次造訪」更新成現在 */
 window.addEventListener("pagehide", () => {
