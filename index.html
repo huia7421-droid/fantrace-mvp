@@ -607,7 +607,7 @@ function renderContents() {
     const off = ["bilibili","Threads","YouTube","Instagram"].includes(c.pf);
     const when = (c.prec === "date_only" ? md(c.date) + " 時間不詳"
                   : md(c.date) + " " + c.time + (c.prec === "approx" ? " 左右" : ""))
-                 + (c.hrs != null ? `　活動後 ${c.hrs.toFixed(1)} 小時` : "");
+                 + (Number.isFinite(c.hrs) ? `　${c.hrs < 0 ? "活動前" : "活動後"} ${Math.abs(c.hrs).toFixed(1)} 小時` : "");
     const trType = c.cap ? "cap" : c.ct === "粉絲翻譯" ? "full"
                    : c.ct === "平台字幕" ? "auto" : "";
     return `<div class="ct${n ? " is-new" : ""}">
@@ -720,15 +720,52 @@ function applyV() {
     .addEventListener("click", () => showTab("content", true));
 }
 
+/* FANTRACE 3.3：僅載入已核准內容；排除已確認的測試貼文。 */
+const EXCLUDED_TEST_IDS = new Set(["X-2108049892035965013"]);
+function contentKey(c) {
+  const u = String(c.url || "").trim();
+  const x = u.match(/^https?:\/\/(?:www\.)?(?:x\.com|twitter\.com)\/(?:[^/]+\/)?status\/(\d+)/i);
+  if (x) return "x:" + x[1];
+  return u ? "url:" + u.replace(/\/$/, "").toLowerCase() : "id:" + String(c.id || "");
+}
+async function loadApprovedContents() {
+  try {
+    const response = await fetch("./approved_contents.json", {cache:"no-store"});
+    if (!response.ok) throw new Error("HTTP " + response.status);
+    const data = await response.json();
+    if (!data || !Array.isArray(data.contents)) throw new Error("JSON 格式不正確");
+    const seen = new Set(CONTENTS.map(contentKey));
+    const knownEvents = new Set(EVENTS.map(e => e.id));
+    let added = 0;
+    for (const c of data.contents) {
+      if (!c || typeof c !== "object" || !c.url || !knownEvents.has(c.ev)) continue;
+      if (EXCLUDED_TEST_IDS.has(String(c.id || "")) || /(?:x\.com|twitter\.com)\/(?:i\/)?(?:status\/)?2108049892035965013(?:\D|$)/i.test(c.url)) continue;
+      const key = contentKey(c);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      CONTENTS.push(c);
+      added++;
+    }
+    console.info("FANTRACE 3.2：新增已核准貼文", added, "篇");
+  } catch (err) {
+    console.warn("FANTRACE 3.2：無法載入已核准貼文，沿用原有手動內容", err);
+  }
+}
+
 /* ── 啟動 ── */
 document.getElementById("nouser").hidden = !!U;
 document.getElementById("dbg").hidden = !DEBUG;
-renderEvents();
-initFilters();
-renderContents();
-renderNew();
-applyV();
-track("開啟頁面", V === "b" ? "內容區（預設）" : "行程區（預設）", ARRIVE);
+/* 載入後才建立篩選器，讓新增貼文能出現在活動與拍攝者選單。 */
+async function startFantrace() {
+  await loadApprovedContents();
+  renderEvents();
+  initFilters();
+  renderContents();
+  renderNew();
+  applyV();
+  track("開啟頁面", V === "b" ? "內容區（預設）" : "行程區（預設）", ARRIVE);
+}
+startFantrace();
 
 /* 離開頁面時把「上次造訪」更新成現在 */
 window.addEventListener("pagehide", () => {
