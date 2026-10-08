@@ -254,6 +254,8 @@ button{font:inherit;color:inherit}
 .filters{background:var(--sunk);border:1px solid var(--line-2);border-radius:var(--r);
   padding:12px 13px;margin-bottom:13px;display:grid;gap:10px}
 .frow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;min-width:0}
+.frow[hidden]{display:none}
+.fsel[hidden]{display:none}
 .flab{font-family:var(--data);font-size:10px;color:var(--muted);letter-spacing:.09em;
   text-transform:uppercase;min-width:66px;flex:0 0 auto}
 .chip{font-size:12.5px;background:var(--card);color:var(--fg-2);border:1px solid var(--line);
@@ -544,31 +546,24 @@ function renderEvents() {
 /* ── 篩選器 ── */
 const F = { subj:null, type:null, tr:null, ev:"", who:"" };
 const SUBJ = ["Namtan","Film","NamtanFilm","Milk","Love","View","Mim"];
-const TYPES = [...new Set(CONTENTS.map(c => c.ct))];
-
-function chips(host, items, key, label) {
-  const el = document.getElementById(host);
-  el.innerHTML = items.map(v =>
-    `<button class="chip" type="button" aria-pressed="false" data-v="${esc(v)}">${esc(v)}</button>`).join("");
-  el.querySelectorAll(".chip").forEach(b =>
-    b.addEventListener("click", () => {
-      const on = F[key] === b.dataset.v;
-      F[key] = on ? null : b.dataset.v;
-      el.querySelectorAll(".chip").forEach(x =>
-        x.setAttribute("aria-pressed", String(!on && x === b)));
-      track("篩選", label, F[key] || "清除");
-      renderContents();
-    }));
-}
+/* 每次重算，這樣 approved_contents.json 帶進來的新類型也會長出來 */
+const allTypes = () => [...new Set(CONTENTS.map(c => c.ct))];
+const TR_OPTS = ["文案有翻譯", "完整翻譯", "平台字幕"];
 
 function initFilters() {
-  chips("f-subj", SUBJ, "subj", "人物");
-  chips("f-type", TYPES, "type", "類型");
-  chips("f-tr", ["文案有翻譯","完整翻譯","平台字幕"], "tr", "翻譯");
+  /* 點擊用事件代理，因為 chip 會被重畫 */
+  CHIP_ROWS.forEach(r => {
+    document.getElementById(r.host).addEventListener("click", e => {
+      const b = e.target.closest(".chip");
+      if (!b) return;
+      F[r.key] = (F[r.key] === b.dataset.v) ? null : b.dataset.v;
+      track("篩選", r.label, F[r.key] || "清除");
+      applyFilters();
+    });
+  });
 
   const sel = document.getElementById("f-ev");
-  /* 已經結束的活動一律列出來，就算還沒有內容也一樣；再加上任何已經有內容的場次。
-     依日期新到舊排，和內容列表的排序一致。 */
+  /* 活動這一排刻意不隨其他條件收斂：它是最上層，而且要保留「已結束但還沒有內容」的場次 */
   EVENTS.filter(e => e.date < TODAY || CONTENTS.some(c => c.ev === e.id))
         .sort((a, b) => (b.date + (b.time || "")).localeCompare(a.date + (a.time || "")))
         .forEach(e => {
@@ -579,44 +574,116 @@ function initFilters() {
   sel.addEventListener("change", () => {
     F.ev = sel.value;
     track("依活動檢索", "內容區", sel.value || "清除");
-    renderContents();
+    applyFilters();
   });
 
   const who = document.getElementById("f-who");
-  const cnt = {};
-  CONTENTS.forEach(c => cnt[c.who] = (cnt[c.who]||0) + 1);
-  Object.entries(cnt).sort((a,b) => b[1]-a[1]).forEach(([h,n]) =>
-    who.insertAdjacentHTML("beforeend", `<option value="${esc(h)}">${esc(h)}（${n}）</option>`));
   who.addEventListener("change", () => {
     F.who = who.value;
     track("依拍攝者檢索", "內容區", who.value || "清除");
-    renderContents();
+    applyFilters();
   });
 
   document.getElementById("clearf").addEventListener("click", () => {
     F.subj = F.type = F.tr = null; F.ev = F.who = "";
-    document.querySelectorAll(".chip").forEach(x => x.setAttribute("aria-pressed","false"));
-    sel.value = ""; who.value = "";
+    sel.value = "";
     track("清除篩選", "內容區", "全部");
-    renderContents();
+    applyFilters();
   });
-}
 
-/* ── 內容區 ── */
-function match(c) {
+  paintChips();
+  paintWho();
+}
+function okSubj(c) {
+  if (!F.subj) return true;
   /* 「NamtanFilm」不是某一個人，是「這筆有兩人同框、或直播裡聊到／出現對方」 */
-  if (F.subj === "NamtanFilm") {
-    if (!(c.cp || (c.subj.includes("Namtan") && c.subj.includes("Film")))) return false;
-  } else if (F.subj && !c.subj.includes(F.subj)) return false;
-  if (F.type && c.ct !== F.type) return false;
-  if (F.ev && c.ev !== F.ev) return false;
-  if (F.who && c.who !== F.who) return false;
-  if (F.tr === "文案有翻譯" && !c.cap) return false;
-  if (F.tr === "完整翻譯" && c.ct !== "粉絲翻譯") return false;
-  if (F.tr === "平台字幕" && c.ct !== "平台字幕") return false;
+  if (F.subj === "NamtanFilm")
+    return !!(c.cp || (c.subj.includes("Namtan") && c.subj.includes("Film")));
+  return c.subj.includes(F.subj);
+}
+function okTr(c) {
+  if (!F.tr) return true;
+  if (F.tr === "文案有翻譯") return !!c.cap;
+  if (F.tr === "完整翻譯") return c.ct === "粉絲翻譯";
+  if (F.tr === "平台字幕") return c.ct === "平台字幕";
   return true;
 }
-
+function match(c) {
+  return okSubj(c) && okTr(c)
+      && (!F.type || c.ct === F.type)
+      && (!F.ev   || c.ev === F.ev)
+      && (!F.who  || c.who === F.who);
+}
+/* 算某一排有哪些選項時，要把那一排自己排除在外。
+   不這樣做的話，選了 Namtan 之後其他人就全部消失，等於選了就換不掉。 */
+function poolExcept(skip) {
+  return CONTENTS.filter(c =>
+       (skip === "subj" || okSubj(c))
+    && (skip === "tr"   || okTr(c))
+    && (skip === "type" || !F.type || c.ct === F.type)
+    && (skip === "ev"   || !F.ev   || c.ev === F.ev)
+    && (skip === "who"  || !F.who  || c.who === F.who));
+}
+function availSubj() {
+  const pool = poolExcept("subj");
+  const has = new Set();
+  pool.forEach(c => c.subj.forEach(x => has.add(x)));
+  const duo = pool.some(c => c.cp || (c.subj.includes("Namtan") && c.subj.includes("Film")));
+  return SUBJ.filter(x => x === "NamtanFilm" ? duo : has.has(x));
+}
+function availType() {
+  const pool = poolExcept("type");
+  return allTypes().filter(t => pool.some(c => c.ct === t));
+}
+function availTr() {
+  const pool = poolExcept("tr");
+  return TR_OPTS.filter(t => pool.some(c =>
+    t === "文案有翻譯" ? c.cap : t === "完整翻譯" ? c.ct === "粉絲翻譯" : c.ct === "平台字幕"));
+}
+const CHIP_ROWS = [
+  { host:"f-subj", key:"subj", label:"人物", avail: availSubj },
+  { host:"f-type", key:"type", label:"類型", avail: availType },
+  { host:"f-tr",   key:"tr",   label:"翻譯", avail: availTr   }
+];
+/* 選到一半條件變得沒有內容時自動放掉，不然會卡在一個看不見的條件上。
+   放掉一個會影響其他排，所以要反覆算到不再變動為止。 */
+function settleFilters() {
+  for (let i = 0; i < 4; i++) {
+    let changed = false;
+    CHIP_ROWS.forEach(r => {
+      if (F[r.key] && !r.avail().includes(F[r.key])) { F[r.key] = null; changed = true; }
+    });
+    if (F.who && !poolExcept("who").some(c => c.who === F.who)) { F.who = ""; changed = true; }
+    if (!changed) return;
+  }
+}
+function paintChips() {
+  CHIP_ROWS.forEach(r => {
+    const el = document.getElementById(r.host);
+    const opts = r.avail();
+    el.innerHTML = opts.map(v =>
+      `<button class="chip" type="button" aria-pressed="${F[r.key] === v}" data-v="${esc(v)}">${esc(v)}</button>`).join("");
+    /* 只剩一個選項的那一排等於篩不掉任何東西，收起來 */
+    el.closest(".frow").hidden = opts.length < 2;
+  });
+}
+function paintWho() {
+  const who = document.getElementById("f-who");
+  const cnt = {};
+  poolExcept("who").forEach(c => cnt[c.who] = (cnt[c.who] || 0) + 1);
+  const keep = F.who;
+  who.innerHTML = '<option value="">全部拍攝者</option>'
+    + Object.entries(cnt).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+        .map(([h, n]) => `<option value="${esc(h)}">${esc(h)}（${n}）</option>`).join("");
+  who.value = keep;
+  who.hidden = Object.keys(cnt).length < 2;
+}
+function applyFilters() {
+  settleFilters();
+  paintChips();
+  paintWho();
+  renderContents();
+}
 function renderContents() {
   const list = CONTENTS.filter(match).sort((a,b) => dt(b).localeCompare(dt(a)));
   document.getElementById("n-ct").textContent =
