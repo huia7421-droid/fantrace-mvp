@@ -123,6 +123,18 @@ button{font:inherit;color:inherit}
   border-radius:var(--r);padding:14px 15px;display:grid;gap:9px;
   transition:transform .13s ease, box-shadow .13s ease}
 .ev:hover{box-shadow:var(--sh-up)}
+/* ── 已完成的活動 ── */
+.ev-sep{display:flex;align-items:center;gap:9px;margin:20px 0 11px}
+.ev-sep .lab{font-family:var(--data);font-size:10px;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.ev-sep .n{font-family:var(--data);font-size:11px;color:var(--muted);
+  background:var(--sunk);border:1px solid var(--line-2);padding:2px 7px;border-radius:6px}
+.ev-sep::after{content:"";flex:1 1 auto;height:1px;background:var(--line)}
+.ev.done{border-left-color:var(--line-2);background:var(--sunk)}
+.ev.done .ev-date{background:transparent;color:var(--muted);border:1px solid var(--line-2)}
+.ev.done .ev-t{color:var(--fg-2)}
+.ev.done .face,.ev.done .ini{filter:saturate(.75)}
+.bd-live{background:var(--new-soft);color:var(--new);font-weight:700}
 .ev-top{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
 .ev-date{font-family:var(--data);font-size:13px;font-weight:500;color:var(--accent);
   background:var(--accent-soft);padding:4px 9px;border-radius:7px;white-space:nowrap}
@@ -467,20 +479,30 @@ function castChip(n, mascot) {
   return `<span class="cm${mascot ? " is-mascot" : ""}">${av}<span class="cm-n">${esc(n)}</span></span>`;
 }
 function renderEvents() {
-  const up = EVENTS.filter(e => e.date >= TODAY)
-                   .sort((a,b) => (a.date + (a.time || "99:99")).localeCompare(b.date + (b.time || "99:99")));
-  document.getElementById("n-ev").textContent = up.length + " 場";
-  document.getElementById("tab-n-ev").textContent = up.length;
-  const box = document.getElementById("evs");
-  if (!up.length) {
-    box.innerHTML = '<div class="empty">' + ICON.none
-      + '目前沒有已公告的活動。<br>有新公告我們會馬上更新，可以過幾天再回來看。</div>';
-    return;
-  }
-  box.innerHTML = up.map(e => `<div class="ev">
+  /* 開始時間（沒寫時間的當天 23:59），全部用台灣時間比 */
+  const startOf = e => e.date + "T" + (e.time || "23:59");
+  const ms = t => Date.parse(t + ":00+08:00");
+  const nowMs = ms(twNow());
+  /* 活動開始後 3 小時內仍算「進行中」，不要一開播就被歸到已完成 */
+  const LIVE_MS = 3 * 60 * 60 * 1000;
+
+  const upcoming = [], done = [];
+  EVENTS.forEach(e => (ms(startOf(e)) + LIVE_MS >= nowMs ? upcoming : done).push(e));
+  upcoming.sort((a, b) => startOf(a).localeCompare(startOf(b)));   /* 近的在前 */
+  done.sort((a, b) => startOf(b).localeCompare(startOf(a)));       /* 剛結束的在前 */
+
+  /* 分頁上的數字維持「還沒發生的場次」，那才是行動訊號 */
+  document.getElementById("n-ev").textContent = upcoming.length + " 場";
+  document.getElementById("tab-n-ev").textContent = upcoming.length;
+
+  const card = (e, isDone) => {
+    /* 已開始、但還在 3 小時的緩衝內 —— 標成進行中，位置仍留在「接下來」 */
+    const live = !isDone && ms(startOf(e)) <= nowMs;
+    return `<div class="ev${isDone ? " done" : ""}">
     <div class="ev-top">
       <span class="ev-date">${md(e.date)}${e.time ? "　" + e.time : "　時間未定"}</span>
-      <span class="bd bd-k">${esc(e.type)}</span>
+      <span class="bd bd-k">${esc(e.type)}</span>${
+      live ? '<span class="bd bd-live">進行中</span>' : ""}
     </div>
     <div class="cast">${
       e.artists.map(a => castChip(a, false)).join("")
@@ -497,7 +519,24 @@ function renderEvents() {
       ${e.src
         ? `<a class="go go-ghost" href="${esc(e.src)}" target="_blank" rel="noopener" data-ev="${e.id}">看官方公告 ↗</a>`
         : '<span class="ext">無官方公告</span>'}
-    </div></div>`).join("");
+    </div></div>`;
+  };
+
+  const box = document.getElementById("evs");
+  let html = "";
+  if (upcoming.length) {
+    html += upcoming.map(e => card(e, false)).join("");
+  } else {
+    html += '<div class="empty">' + ICON.none
+         + '目前沒有已公告的活動。<br>有新公告我們會馬上更新，可以過幾天再回來看。</div>';
+  }
+  if (done.length) {
+    html += `<div class="ev-sep"><span class="lab">已完成</span>`
+          + `<span class="n">${done.length} 場</span></div>`
+          + done.map(e => card(e, true)).join("");
+  }
+  box.innerHTML = html;
+
   box.querySelectorAll("[data-ev]").forEach(a =>
     a.addEventListener("click", () => track("外連點擊", "行程區", a.dataset.ev)));
 }
@@ -640,9 +679,9 @@ function renderNew() {
   const n = CONTENTS.filter(isNew).length;
   flagNew("newpill", "tab-dot", n, CONTENTS.length, `新增 ${n} 筆`);
   /* 行程區：只看還沒發生的場次 */
-  const up = EVENTS.filter(e => e.date >= TODAY);
-  const m = up.filter(isNewEv).length;
-  flagNew("newpill-ev", "tab-dot-ev", m, up.length, `新增 ${m} 場`);
+  /* 行程區現在同時顯示未來和已完成的場次，所以總數要算全部 */
+  const m = EVENTS.filter(isNewEv).length;
+  flagNew("newpill-ev", "tab-dot-ev", m, EVENTS.length, `新增 ${m} 場`);
 }
 /* 第一次造訪時全部都是「新的」，那就不該整頁都亮 —— 所以 n 等於總數時不顯示 */
 function flagNew(pillId, dotId, n, total, label) {
