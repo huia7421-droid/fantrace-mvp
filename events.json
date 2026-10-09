@@ -1,0 +1,274 @@
+{
+  "events": [
+    {
+      "id": "E01",
+      "date": "2026-09-18",
+      "time": "18:42",
+      "title": "NamtanFilm 糖影 IG 雙人直播連線",
+      "online": true,
+      "venue": "Instagram",
+      "artists": [
+        "Namtan",
+        "Film"
+      ],
+      "tags": [],
+      "type": "直播",
+      "cp": true,
+      "src": "https://www.instagram.com/namtan.tipnaree/",
+      "ht": []
+    },
+    {
+      "id": "E02",
+      "date": "2026-09-22",
+      "time": "11:00",
+      "title": "GARNIER LAB THE CLINICAL VIT C EXPERIENCE",
+      "online": false,
+      "venue": "CentralWorld, Bangkok",
+      "artists": [
+        "Film"
+      ],
+      "tags": [
+        "Lunar"
+      ],
+      "type": "代言活動",
+      "cp": false,
+      "src": "https://x.com/GarnierThailand/status/2099822333410087149",
+      "ht": []
+    },
+    {
+      "id": "E03",
+      "date": "2026-09-25",
+      "time": "21:00",
+      "title": "The Celebrities EP.11 (น้ำตาล - ฟิล์ม)",
+      "online": true,
+      "venue": "TrueID",
+      "artists": [
+        "Namtan",
+        "Film"
+      ],
+      "tags": [],
+      "type": "訪談",
+      "cp": true,
+      "src": "https://www.threads.com/share/Ij2Wu8Ya0/",
+      "ht": []
+    },
+    {
+      "id": "E04",
+      "date": "2026-09-29",
+      "time": "22:30",
+      "title": "GMMTV LIVE HOUSE with NAMTAN FILM LUNAR",
+      "online": true,
+      "venue": "YouTube/TikTok",
+      "artists": [
+        "Namtan",
+        "Film"
+      ],
+      "tags": [
+        "Lunar"
+      ],
+      "type": "直播",
+      "cp": true,
+      "src": "https://www.youtube.com/live/JGbHzmnCxL4",
+      "ht": []
+    },
+    {
+      "id": "E05",
+      "date": "2026-10-02",
+      "time": "17:00",
+      "title": "Girl Rules FanMeeting in Manila（接機）",
+      "online": false,
+      "venue": "馬尼拉機場",
+      "artists": [
+        "Namtan",
+        "Film",
+        "Milk",
+        "Love",
+        "View",
+        "Mim"
+      ],
+      "tags": [],
+      "type": "接機",
+      "cp": true,
+      "src": "",
+      "ht": []
+    },
+    {
+      "id": "E06",
+      "date": "2026-10-03",
+      "time": "16:45",
+      "title": "Girl Rules FanMeeting in Manila（彩排）",
+      "online": false,
+      "venue": "馬尼拉 SMX Convention Center",
+      "artists": [
+        "Namtan",
+        "Film",
+        "Milk",
+        "Love",
+        "View",
+        "Mim"
+      ],
+      "tags": [],
+      "type": "彩排",
+      "cp": true,
+      "src": "",
+      "ht": []
+    },
+    {
+      "id": "E07",
+      "date": "2026-10-03",
+      "time": "18:00",
+      "title": "Girl Rules FanMeeting in Manila（正式）",
+      "online": false,
+      "venue": "馬尼拉 SMX Convention Center",
+      "artists": [
+        "Namtan",
+        "Film",
+        "Milk",
+        "Love",
+        "View",
+        "Mim"
+      ],
+      "tags": [],
+      "type": "見面會",
+      "cp": true,
+      "src": "https://www.instagram.com/p/DdvxXBWkneY/",
+      "ht": []
+    },
+    {
+      "id": "E08",
+      "date": "2026-10-09",
+      "time": "19:30",
+      "title": "GMMTV Fanival 2026 Happy Family Fan Sign",
+      "online": false,
+      "venue": "Union Hall, Union Mall",
+      "artists": [
+        "Namtan",
+        "Film"
+      ],
+      "tags": [],
+      "type": "簽售",
+      "cp": true,
+      "src": "https://www.instagram.com/p/Dd6PIQnHwSK/",
+      "ht": []
+    },
+    {
+      "id": "E09",
+      "date": "2026-10-10",
+      "time": "21:00",
+      "title": "Garnier Bright Complete Clinical Serum 10.10 Live เคลียร์จุดกับน้ำตาลลูน่า",
+      "online": true,
+      "venue": "TikTok @GarnierThailand",
+      "artists": [
+        "Namtan"
+      ],
+      "tags": [
+        "Lunar"
+      ],
+      "type": "直播",
+      "cp": false,
+      "src": "https://www.instagram.com/p/DeHLz-8H2gR/",
+      "ht": [
+        "#GarnierClinicalSerumxNamtanLunar",
+        "#NamtanTipnaree",
+        "#Lunar",
+        "#GarnierThailand"
+      ]
+    },
+    {
+      "id": "E10",
+      "date": "2026-10-07",
+      "time": "20:00",
+      "title": "Armani TikTok Shop — Brand Prime Day",
+      "online": true,
+      "venue": "TikTok @armanibeauty_thailand",
+      "artists": [
+        "Film"
+      ],
+      "tags": [],
+      "type": "直播",
+      "cp": false,
+      "ht": [
+        "#ArmaniTHPrimeDay",
+        "#ArmaniTHPrimeDayxFilm"
+      ],
+      "src": "https://www.instagram.com/p/DeHLxKBn-mW/"
+    },
+    {
+      "id": "E11",
+      "date": "2026-10-08",
+      "time": "21:00",
+      "title": "Mille Red Cap Gala",
+      "online": true,
+      "venue": "TikTok Mille Thailand",
+      "artists": [
+        "Film"
+      ],
+      "tags": [],
+      "type": "直播",
+      "cp": false,
+      "ht": [
+        "#MillexFilmRachanun"
+      ],
+      "src": "https://www.instagram.com/p/DeJvo5nn-F-/"
+    },
+    {
+      "id": "E12",
+      "date": "2026-10-10",
+      "time": "21:00",
+      "title": "Winter is coming ฤดูไหนผิวก็ชุ่มชื้น",
+      "online": true,
+      "venue": "Shopee Live @ZA Cosmetics",
+      "artists": [
+        "Film"
+      ],
+      "tags": [],
+      "type": "直播",
+      "cp": false,
+      "ht": [
+        "#zacosmeticsthailand",
+        "#ZAxfilmrachanun"
+      ],
+      "src": "https://www.instagram.com/p/DeHLz-8H2gR/"
+    },
+    {
+      "id": "E13",
+      "date": "2026-11-29",
+      "time": "",
+      "title": "Namtan's Secret Garden",
+      "online": false,
+      "venue": "地點未公布",
+      "artists": [
+        "Namtan"
+      ],
+      "tags": [],
+      "type": "衝榜聚會",
+      "cp": false,
+      "ht": [
+        "#LABXxNamtan",
+        "#LABXNAMTANSECRETGARDEN",
+        "#NamtanTipnaree",
+        "#LABXClinic"
+      ],
+      "src": "https://x.com/LABXClinic/status/2105499826985271522"
+    },
+    {
+      "title": "測試",
+      "date": "2026-10-10",
+      "time": "15:31",
+      "venue": "thailand",
+      "type": "見面會",
+      "src": "",
+      "artists": [
+        "Namtan",
+        "Film"
+      ],
+      "tags": [],
+      "ht": [
+        "#nf"
+      ],
+      "online": false,
+      "cp": false,
+      "id": "E14"
+    }
+  ]
+}
