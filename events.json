@@ -250,6 +250,71 @@
         "#LABXClinic"
       ],
       "src": "https://x.com/LABXClinic/status/2105499826985271522"
+    },
+    {
+      "title": "GMMTV Fanival 2026 Happy Family: Fandom Character Parade",
+      "date": "2026-10-11",
+      "time": "12:00",
+      "venue": "Union Hall, Union Mall",
+      "type": "見面會",
+      "src": "https://www.facebook.com/share/p/18P2LUHrDL/",
+      "artists": [
+        "Lunar"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": false,
+      "id": "E14"
+    },
+    {
+      "title": "A FANTASIES จิบ•เพ้อ•ฟิน•Win",
+      "date": "2026-10-12",
+      "time": "15:00",
+      "venue": "The Botanical House Bangkok",
+      "type": "非公開活動",
+      "src": "https://www.instagram.com/p/DcVbWKSHbts/?utm_source=ig_web_copy_link&xtok=MzRlODBiNWFlZA==&srtk=MzRlODBiNWFlZA==",
+      "artists": [
+        "Namtan",
+        "Film"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": true,
+      "id": "E15"
+    },
+    {
+      "title": "GMMTV Fanival 2026 Happy Family: Fandom Character Parade",
+      "date": "2026-10-13",
+      "time": "12:00",
+      "venue": "Union Hall, Union Mall",
+      "type": "見面會",
+      "src": "https://www.facebook.com/share/p/18P2LUHrDL/",
+      "artists": [
+        "Lunar"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": true,
+      "id": "E16"
+    },
+    {
+      "title": "MAYA TV AWARD 2026",
+      "date": "2026-10-15",
+      "time": "16:00",
+      "venue": "MCC HALL The mall lifestore Bangkapi",
+      "type": "頒獎典禮出席",
+      "src": "https://www.instagram.com/p/DeJ1ixMj0ey/",
+      "artists": [
+        "Lunar"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": true,
+      "id": "E17"
     }
   ]
 }
