@@ -250,25 +250,6 @@
         "#LABXClinic"
       ],
       "src": "https://x.com/LABXClinic/status/2105499826985271522"
-    },
-    {
-      "title": "測試",
-      "date": "2026-10-10",
-      "time": "15:31",
-      "venue": "thailand",
-      "type": "見面會",
-      "src": "",
-      "artists": [
-        "Namtan",
-        "Film"
-      ],
-      "tags": [],
-      "ht": [
-        "#nf"
-      ],
-      "online": false,
-      "cp": false,
-      "id": "E14"
     }
   ]
 }
