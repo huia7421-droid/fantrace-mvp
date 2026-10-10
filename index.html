@@ -446,7 +446,7 @@ try { LAST = localStorage.getItem("ft_last_" + (U||"x")) || LAST; } catch(e) {}
 /* ── CP 登錄表。加一組 CP 就是在這裡加一列 ── */
 /* 要再加一組 CP，就在這個陣列加一列，其他地方都不用改。
    members 是真人，mascots 是吉祥物（記在資料的 tags 欄位，不是 subj） */
-const CPS = [
+let CPS = [
   { id:"namtanfilm", name:"NamtanFilm", members:["Namtan","Film"],  mascots:["Lunar"]  },
   { id:"milklove",   name:"MilkLove",   members:["Milk","Love"],    mascots:["Muvmuv"] },
   { id:"emibonnie",  name:"EmiBonnie",  members:["Emi","Bonnie"],   mascots:["Any"]    },
@@ -462,8 +462,14 @@ remember("cp", CP.id);
 const subjOf = c => (c.subj && c.subj.length) ? c.subj
                   : ((EV_BY_ID[c.ev] && EV_BY_ID[c.ev].artists) || []);
 /* 這一組 CP 的人或吉祥物有出現，就算屬於這一組 */
-const inCP = (who, tags) => who.some(x => CP.members.includes(x))
-                         || (tags || []).some(t => CP.mascots.includes(t));
+const inCP = (who, tags) => {
+  const participants = Array.isArray(who) ? who : [];
+  const labels = Array.isArray(tags) ? tags : [];
+  const members = Array.isArray(CP.members) ? CP.members : [];
+  const mascots = Array.isArray(CP.mascots) ? CP.mascots : [];
+  return participants.some(x => members.includes(x) || mascots.includes(x))
+      || labels.some(x => mascots.includes(x));
+};
 /* 這兩個是「目前這一組 CP」底下的資料，畫面一律只看它們 */
 let EVS = [], CTS = [];
 function scope() {
@@ -998,7 +1004,19 @@ async function loadApprovedContents() {
 document.getElementById("nouser").hidden = !!U;
 document.getElementById("dbg").hidden = !DEBUG;
 /* 載入後才建立篩選器，讓新增貼文能出現在活動與拍攝者選單。 */
+async function loadCPRegistryForSite(){
+  try {
+    const response = await fetch('./cp_registry.json',{cache:'no-store'});
+    if(!response.ok) throw Error('HTTP '+response.status);
+    const d=await response.json();
+    if(!d || !Array.isArray(d.cps) || !d.cps.length) throw Error('Invalid CP registry');
+    CPS=d.cps;
+    CP=CPS.find(x=>x.id===(Q.get('cp')||'').toLowerCase()) || CPS.find(x=>x.id===recall('cp')) || CPS[0];
+    remember('cp',CP.id);
+  } catch(e) { console.warn('FANTRACE: using built-in CP fallback',e); }
+}
 async function startFantrace() {
+  await loadCPRegistryForSite();
   await loadApprovedContents();
   initCP();
   initFilters();

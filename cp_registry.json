@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "cps": [
+    {
+      "id": "namtanfilm",
+      "name": "NamtanFilm",
+      "members": [
+        "Namtan",
+        "Film"
+      ],
+      "mascots": [
+        "Lunar"
+      ]
+    },
+    {
+      "id": "milklove",
+      "name": "MilkLove",
+      "members": [
+        "Milk",
+        "Love"
+      ],
+      "mascots": [
+        "Muvmuv"
+      ]
+    },
+    {
+      "id": "emibonnie",
+      "name": "EmiBonnie",
+      "members": [
+        "Emi",
+        "Bonnie"
+      ],
+      "mascots": [
+        "Any"
+      ]
+    },
+    {
+      "id": "viewmim",
+      "name": "ViewMim",
+      "members": [
+        "View",
+        "Mim"
+      ],
+      "mascots": [
+        "Vimmy"
+      ]
+    }
+  ]
+}
