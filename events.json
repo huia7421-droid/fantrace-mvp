@@ -405,6 +405,84 @@
       "online": false,
       "cp": true,
       "id": "E22"
+    },
+    {
+      "title": "GMMTV Fanival 2026 Happy Family: Fandom Character Parade",
+      "date": "2026-10-11",
+      "time": "12:00",
+      "venue": "Union Hall, Union Mall",
+      "type": "見面會",
+      "src": "https://www.facebook.com/gmmtvofficial/posts/pfbid0MY2G6bLXDBHkNkZapcFdMjLZVcAWF5Uc29nh6ij9ES1NMVfKCdiiG2aeuKPxBUHTl?rdid=LW8GnnI85z9NNbp0#",
+      "artists": [
+        "Muvmuv"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": false,
+      "id": "E23"
+    },
+    {
+      "title": "GMMTV Fanival 2026 Happy Family: Fandom Character Parade",
+      "date": "2026-10-13",
+      "time": "12:00",
+      "venue": "Union Hall, Union Mall",
+      "type": "見面會",
+      "src": "https://www.facebook.com/gmmtvofficial/posts/pfbid0MY2G6bLXDBHkNkZapcFdMjLZVcAWF5Uc29nh6ij9ES1NMVfKCdiiG2aeuKPxBUHTl?rdid=LW8GnnI85z9NNbp0#",
+      "artists": [
+        "Muvmuv"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": false,
+      "id": "E24"
+    },
+    {
+      "title": "Blush Blossom Fan Fest 2026 in Macau",
+      "date": "2026-10-24",
+      "time": "19:00",
+      "venue": "Fisherman's Wharf Convention & Exhibition Center, Macau",
+      "type": "見面會",
+      "src": "https://www.instagram.com/p/DcnYhrhD8Jl/",
+      "artists": [
+        "Namtan",
+        "Film",
+        "Milk",
+        "Love",
+        "Emi",
+        "Bonnie",
+        "View",
+        "Mim"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": true,
+      "id": "E25"
+    },
+    {
+      "title": "Blush Blossom Fan Fest 2026 in Kaohsiung",
+      "date": "2026-11-07",
+      "time": "17:00",
+      "venue": "高雄流行音樂中心 海音館",
+      "type": "見面會",
+      "src": "https://www.instagram.com/p/DcSbgumHGxA/",
+      "artists": [
+        "Namtan",
+        "Film",
+        "Milk",
+        "Love",
+        "Emi",
+        "Bonnie",
+        "View",
+        "Mim"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": true,
+      "id": "E26"
     }
   ]
 }
