@@ -315,6 +315,96 @@
       "online": false,
       "cp": true,
       "id": "E17"
+    },
+    {
+      "title": "Fan Sign - GMMTV FANIVAL 2026 HAPPY FAMILY",
+      "date": "2026-10-11",
+      "time": "16:30",
+      "venue": "Union Hall, Union Mall (16:30)",
+      "type": "簽售",
+      "src": "https://www.instagram.com/p/Dd6PIQnHwSK/",
+      "artists": [
+        "Milk",
+        "Love",
+        "Muvmuv"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": true,
+      "id": "E18"
+    },
+    {
+      "title": "GMMTV Fanival 2026 Happy Family: Fandom Character Parade",
+      "date": "2026-10-12",
+      "time": "12:00",
+      "venue": "Union Hall, Union Mall",
+      "type": "見面會",
+      "src": "https://www.facebook.com/gmmtvofficial/posts/pfbid0MY2G6bLXDBHkNkZapcFdMjLZVcAWF5Uc29nh6ij9ES1NMVfKCdiiG2aeuKPxBUHTl?rdid=LW8GnnI85z9NNbp0#",
+      "artists": [
+        "Any"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": false,
+      "id": "E19"
+    },
+    {
+      "title": "GMMTV Fanival 2026 Happy Family: Fandom Character Parade (Any)",
+      "date": "2026-10-13",
+      "time": "12:00",
+      "venue": "Union Hall, Union Mall",
+      "type": "見面會",
+      "src": "https://www.facebook.com/gmmtvofficial/posts/pfbid0MY2G6bLXDBHkNkZapcFdMjLZVcAWF5Uc29nh6ij9ES1NMVfKCdiiG2aeuKPxBUHTl?rdid=LW8GnnI85z9NNbp0#",
+      "artists": [
+        "Any"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": false,
+      "id": "E20"
+    },
+    {
+      "title": "Moon Shadow: The Afterglow Fan Party (Day 1)",
+      "date": "2026-10-14",
+      "time": "19:00",
+      "venue": "Union Hall, Union Mall",
+      "type": "見面會",
+      "src": "https://www.instagram.com/p/Ddojo3dmYsM/?img_index=1",
+      "artists": [
+        "Emi",
+        "Bonnie",
+        "Any"
+      ],
+      "tags": [],
+      "ht": [
+        "#MoonshadowSeriesEP7"
+      ],
+      "online": false,
+      "cp": true,
+      "id": "E21"
+    },
+    {
+      "title": "Moon Shadow: The Afterglow Fan Party (Day 2)",
+      "date": "2026-10-15",
+      "time": "19:00",
+      "venue": "Union Hall, Union Mall",
+      "type": "見面會",
+      "src": "https://www.instagram.com/p/Ddojo3dmYsM/?img_index=1",
+      "artists": [
+        "Emi",
+        "Bonnie",
+        "Any"
+      ],
+      "tags": [],
+      "ht": [
+        "#MoonshadowSeriesEP7"
+      ],
+      "online": false,
+      "cp": true,
+      "id": "E22"
     }
   ]
 }
