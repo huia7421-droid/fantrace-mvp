@@ -483,6 +483,23 @@
       "online": false,
       "cp": true,
       "id": "E26"
+    },
+    {
+      "title": "T-POP Stage (On-air)",
+      "date": "2026-10-22",
+      "time": "21:45",
+      "venue": "Youtube: T-POP Stage",
+      "type": "線上",
+      "src": "https://www.youtube.com/@TPopStageOfficial/featured",
+      "artists": [
+        "Emi",
+        "Bonnie"
+      ],
+      "tags": [],
+      "ht": [],
+      "online": false,
+      "cp": true,
+      "id": "E27"
     }
   ]
 }
